@@ -81,13 +81,15 @@ namespace SimpleCalculator
 
         public bool ValidateData(string toOperator)
         {
-            Regex rx = new Regex(@"[\d]+[\s][-+*/]{1,1}[\s][\d]+[^\s]");
+            Regex rx = new Regex(@"[-]{0,1}[\d]+[\s][-+*/]{1,1}[\s][-]{0,1}[\d]+");
+
             Match validated = rx.Match(toOperator);
-            if (validated.Success)
+
+            if (validated.Success && validated.Length == toOperator.Length)
             {
                 return true;
-            } else
-            {
+
+            } else { 
                 throw new Exception("invalid data");
             }
         }

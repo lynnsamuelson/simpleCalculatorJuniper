@@ -197,6 +197,7 @@ namespace SimpleCalculatorTests
             Parse parse = new Parse();
             string toOperator = "2 + 1 1";
             bool validData = parse.ValidateData(toOperator);
+           // Assert.AreEqual(false, validData);
 
 
         }
