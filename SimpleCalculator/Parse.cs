@@ -57,6 +57,10 @@ namespace SimpleCalculator
                 {
                     return '/';
                 }
+                else if (i == '=')
+                {
+                    return '=';
+                }
             }
             throw new Exception("invalid input");
         }
