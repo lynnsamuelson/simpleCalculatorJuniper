@@ -89,8 +89,11 @@ namespace SimpleCalculator
             {
                 return true;
 
-            } else { 
-                throw new Exception("invalid data");
+            }
+            else
+            {
+                return false;
+                //throw new Exception("invalid data");
             }
         }
     }
