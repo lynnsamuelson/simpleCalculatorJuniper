@@ -10,6 +10,8 @@ namespace SimpleCalculator
     {
         public char constant { get; set; }
         public Parse parse = new Parse();
+        
+        
 
         public char GetConstant(string input)
         {
@@ -34,6 +36,32 @@ namespace SimpleCalculator
             {
                 return false;
             }
+        }
+
+
+        public static Dictionary<char, int> AddToDictionary(string response)
+        {
+            Constants constant = new Constants();
+            bool isConstant = constant.IsConstantDeclaration(response);
+            if (isConstant == true)
+            {
+                Dictionary<char, int> dictionary = new Dictionary<char, int>();
+                int constantValue = constant.GetConstantsValue(response);
+                char theConstant = constant.GetConstant(response);
+                dictionary.Add(theConstant, constantValue);
+                return dictionary;
+            } else
+            {
+                throw new Exception("This is not a constant.");
+            }
+        }
+
+        public int ApplyDictionary(Dictionary<char, int> dictionary, string nextProblem)
+        {
+            Constants constant = new Constants();
+            char theConstant = constant.GetConstant(nextProblem);
+            int retrieveTheValue = dictionary[theConstant];
+            return retrieveTheValue;
         }
     }
 

@@ -13,6 +13,7 @@ namespace SimpleCalculator
         {
             Stack monkey = new Stack();
             Parse parse = new Parse();
+            Constants constant = new Constants();
 
             bool toExit = false;
 
@@ -39,10 +40,18 @@ namespace SimpleCalculator
                         char theOperator = parse.GetOperator(response);
                         List<string> numbers = parse.GetNumbers(response);
                         List<int> numberInts = parse.MakeInts(numbers);
-                        int num1 = numberInts[0];
-                        int num2 = numberInts[1];
-                        int calculator = parse.Calculate(theOperator, num1, num2);
-                        Console.WriteLine("The answer is " + calculator + ".");
+                        if (theOperator == '+' || theOperator == '-' || theOperator == '/' || theOperator == '*')
+                        {
+                            int calculator = parse.Calculate(theOperator, numberInts[0], numberInts[1]);
+                            Console.WriteLine("The answer is " + calculator + ".");
+                        }
+                        if (theOperator == '=')
+                        {
+
+                            int constantValue = constant.GetConstantsValue(response);
+                            char theConstant = constant.GetConstant(response); 
+                            Console.WriteLine("The constant " + theConstant + " has been saved with the value " + constantValue + ".");
+                        }
                     }
                     else if (validResponse == false)
                     {

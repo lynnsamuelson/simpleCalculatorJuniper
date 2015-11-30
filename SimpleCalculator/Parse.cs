@@ -19,11 +19,17 @@ namespace SimpleCalculator
 
         public List<string> GetNumbers(string toInt)
         {
-            ValidateData(toInt);
-            Char[] delimiterChars = { ' ' };
-            string[] numbers = toInt.Split(delimiterChars);
-            List<string> numberInt = numbers.ToList();
-            return numberInt;
+            bool valid = ValidateData(toInt);
+            if (valid == true)
+            {
+                Char[] delimiterChars = { ' ' };
+                string[] numbers = toInt.Split(delimiterChars);
+                List<string> numberInt = numbers.ToList();
+                return numberInt;
+            } else
+            {
+                throw new Exception("invalid data");
+            }
         }
 
         public List<int> MakeInts(List<string> numberInt)
@@ -34,6 +40,23 @@ namespace SimpleCalculator
                             .Select(str => x)
                             .ToList();
             return numbers;
+        }
+
+        public List<int> MakeIntsToo(List<string> numberInt, Dictionary<char, int> dictionary)
+        {
+
+            List<int> numbers = new List<int> { };
+            int y = 0;
+            char[] num1 = numberInt[0].ToCharArray();
+            int number1 = dictionary[num1[0]];
+            numbers.Add(number1);
+            int x = 0;
+            List<int> numbers2 = numberInt.Where(str => int.TryParse(str, out x))
+                            .Select(str => x)
+                            .ToList();
+            numbers.AddRange(numbers2);
+            return numbers;
+
         }
 
         public char GetOperator(string toOperator)
@@ -85,7 +108,7 @@ namespace SimpleCalculator
 
         public bool ValidateData(string toOperator)
         {
-            Regex rx = new Regex(@"[-]{0,1}[\d]+[\s][-+*/]{1,1}[\s][-]{0,1}[\d]+");
+            Regex rx = new Regex(@"[-]{0,1}[\da-z]+[\s][-+*/=]{1,1}[\s][-]{0,1}[\d]+");
 
             Match validated = rx.Match(toOperator);
 
@@ -97,8 +120,10 @@ namespace SimpleCalculator
             else
             {
                 return false;
-                //throw new Exception("invalid data");
+                
             }
         }
+
+        
     }
 }

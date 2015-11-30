@@ -163,12 +163,13 @@ namespace SimpleCalculatorTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "invalid input")]
+        //[ExpectedException(typeof(Exception), "invalid input")]
         public void ParseEnsureThatBadInputIsInvalid()
         {
             Parse parse = new Parse();
             string toOperator = "2 + + 1";
             bool validData = parse.ValidateData(toOperator);
+            Assert.IsFalse(validData);
             
         }
 
@@ -191,13 +192,14 @@ namespace SimpleCalculatorTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "invalid input")]
+        //[ExpectedException(typeof(Exception), "invalid input")]
         public void ParseEnsureThatThreeNumbersBadInputIsInvalidWhenParsingNumbers()
         {
             Parse parse = new Parse();
             string toOperator = "2 + 1 1";
             bool validData = parse.ValidateData(toOperator);
-           // Assert.AreEqual(false, validData);
+            Assert.IsFalse(validData);
+            Assert.AreEqual(false, validData);
 
 
         }
